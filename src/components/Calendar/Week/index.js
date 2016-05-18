@@ -12,7 +12,12 @@ export default function Week(props) {
   return (
     <tr className={weekClass}>
       {props.days.map((day, index) => (
-        <Day key={day || index + 50} day={day} range={props.range} />
+        <Day
+          key={day || index + 50}
+          day={day}
+          range={props.range}
+          handleChange={props.handleChange}
+        />
       ))}
     </tr>
   );
@@ -21,4 +26,5 @@ export default function Week(props) {
 Week.propTypes = {
   days: React.PropTypes.arrayOf(React.PropTypes.object),
   range: React.PropTypes.arrayOf(React.PropTypes.object),
+  handleChange: React.PropTypes.func,
 };

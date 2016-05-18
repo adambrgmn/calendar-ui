@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .calendar-day {
   width: 2.5rem;
   height: 2.5rem;
@@ -5,16 +7,15 @@
   padding: 0.5rem;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-  &:hover {
-    background: #B0BEC5;
-  }
+}
+
+.today {
+  background: $calendar-today;
 }
 
 .selected {
   border-radius: 0;
-  background: #B0BEC5;
+  background: $calendar-selected;
 }
 
 .selected.selected-first {
@@ -30,4 +31,23 @@
 .calendar-day.empty {
   background: none;
   cursor: default;
+}
+
+.calendar-day-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  &:hover {
+    background: $calendar-hover;
+  }
+}
+
+.calendar-day-check {
+  display: none;
 }
