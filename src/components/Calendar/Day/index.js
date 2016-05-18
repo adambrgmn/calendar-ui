@@ -8,19 +8,22 @@ export default class Day extends Component {
     super(props);
     this.selected = inRange(this.props.day, this.props.range);
     this.dayClass = classNames({
-      'selected-first': this.selected === 'first',
-      'selected-last': this.selected === 'last',
       'calendar-day': true,
       empty: !this.props.day,
-      today: this.props.day ? this.props.day.isSame(new Date(), 'day') : false,
+    });
+    this.labelClass = classNames({
+      'calendar-day-label': true,
       selected: this.selected,
+      'selected-first': this.selected === 'first',
+      'selected-last': this.selected === 'last',
+      today: this.props.day ? this.props.day.isSame(new Date(), 'day') : false,
     });
   }
 
   buildCheckbox() {
     if (!this.props.day) return null;
     return (
-      <label className="calendar-day-label">
+      <label className={this.labelClass}>
         <input
           className="calendar-day-check"
           type="checkbox"
@@ -36,9 +39,9 @@ export default class Day extends Component {
 
   render() {
     return (
-      <td className={this.dayClass}>
+      <li className={this.dayClass}>
         {this.buildCheckbox()}
-      </td>
+      </li>
     );
   }
 }

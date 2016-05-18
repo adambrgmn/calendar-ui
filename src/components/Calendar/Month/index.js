@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import splitArray from '../../../lib/splitArray';
 
-import CalendarHead from '../CalendarHead';
+import MonthHead from '../MonthHead';
 import Week from '../Week';
 
 export default class Month extends Component {
@@ -31,12 +31,14 @@ export default class Month extends Component {
 
   render() {
     return (
-      <table className="calendar">
-        <CalendarHead moment={this.props.moment} />
-        <tbody className="calendar-body">
+      <div className="calendar-month">
+        <div className="calendar-month-header">
+          <MonthHead moment={this.props.moment} />
+        </div>
+        <div className="calendar-weeks">
           {this.generateWeeks()}
-        </tbody>
-      </table>
+        </div>
+      </div>
     );
   }
 }

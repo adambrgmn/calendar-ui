@@ -10,7 +10,7 @@ export default function Week(props) {
   });
 
   return (
-    <tr className={weekClass}>
+    <ul className={weekClass}>
       {props.days.map((day, index) => (
         <Day
           key={day || index + 50}
@@ -19,7 +19,7 @@ export default function Week(props) {
           handleChange={props.handleChange}
         />
       ))}
-    </tr>
+    </ul>
   );
 }
 

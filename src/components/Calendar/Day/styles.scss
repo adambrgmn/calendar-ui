@@ -1,53 +1,34 @@
-@import '../../../styles/variables.scss';
+@import '../../../styles/globals.scss';
 
 .calendar-day {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 50%;
-  padding: 0.5rem;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.today {
-  background: $calendar-today;
-}
-
-.selected {
-  border-radius: 0;
-  background: $calendar-selected;
-}
-
-.selected.selected-first {
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
-}
-
-.selected.selected-last {
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
-}
-
-.calendar-day.empty {
-  background: none;
-  cursor: default;
 }
 
 .calendar-day-label {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  vertical-align: middle;
+  font-size: 0.8rem;
+  color: $calendar-text-primary;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+
   &:hover {
+    color: $calendar-text-white;
     background: $calendar-hover;
   }
 }
 
+.calendar-day-label.selected {
+  background: $calendar-selected;
+}
+
 .calendar-day-check {
-  display: none;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }

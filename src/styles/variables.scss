@@ -1,3 +1,20 @@
-$calendar-today: #ECEFF1;
-$calendar-selected: #CFD8DC;
-$calendar-hover: #B0BEC5;
+$primary500: #3F51B5;
+$primary50: #E8EAF6;
+$primary100: #C5CAE9;
+$primary200: #9FA8DA;
+$primary300: #7986CB;
+$primary400: #5C6BC0;
+$primary500: #3F51B5;
+$primary600: #3949AB;
+$primary700: #303F9F;
+$primary800: #283593;
+$primary900: #1A237E;
+
+$calendar-text-primary: rgba(0, 0, 0, 0.87);
+$calendar-text-secondary: rgba(0, 0, 0, 0.54);
+$calendar-text-disabled: rgba(0, 0, 0, 0.38);
+$calendar-text-white: rgba(255, 255, 255, 1);
+$calendar-header: $primary500;
+$calendar-today: $primary50;
+$calendar-selected: $primary100;
+$calendar-hover: $primary300;
