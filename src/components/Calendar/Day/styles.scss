@@ -1,0 +1,33 @@
+.calendar-day {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  &:hover {
+    background: #B0BEC5;
+  }
+}
+
+.calendar-day.selected {
+  border-radius: 0;
+  background: #B0BEC5;
+}
+
+.selected.selected-first {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.selected.selected-last {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.calendar-day.empty {
+  background: none;
+  cursor: default;
+}
