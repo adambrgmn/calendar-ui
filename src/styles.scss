@@ -1,0 +1,17 @@
+*, *::before, *::after {
+  transition: background 0.5s;
+  box-sizing: border-box;
+}
+
+body {
+  background: #eee;
+}
+
+.container {
+  margin: 50px auto;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 5px;
+  max-width: 350px;
+  text-align: center;
+}
