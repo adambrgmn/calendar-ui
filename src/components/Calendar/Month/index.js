@@ -7,20 +7,25 @@ import MonthHead from '../MonthHead';
 import Week from '../Week';
 
 export default class Month extends Component {
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = (nextProps) => this.props.moment !== nextProps.moment;
+  }
+
   generateWeeks() {
-    const now = this.props.moment;
-    const monthLength = moment(now).endOf('month').date();
+    const monthLength = moment(this.props.moment).endOf('month').date();
     const paddedDays = [];
-    const paddingLeft = moment(now).date(1).weekday();
-    const paddingRight = 7 - (moment(now).endOf('month').weekday() + 1);
+    const paddingLeft = moment(this.props.moment).date(1).weekday();
+    const paddingRight = 7 - (moment(this.props.moment).endOf('month').weekday() + 1);
 
     for (let i = -paddingLeft; i < monthLength + paddingRight; i++) {
-      paddedDays.push(moment(now).date(i + 1));
+      paddedDays.push(moment(this.props.moment).date(i + 1));
     }
     const weeks = splitArray(paddedDays, 7);
+
     return weeks.map((days) => (
       <Week
-        key={days[0].week()}
+        key={`${this.props.moment.month()}-${days[0].week()}`}
         days={days}
         range={this.props.range}
         monthInView={this.props.moment}

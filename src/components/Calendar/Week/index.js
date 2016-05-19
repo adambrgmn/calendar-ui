@@ -30,26 +30,6 @@ export default class Week extends Component {
   }
 }
 
-// export default function Week(props) {
-//   const weekClass = classNames({
-//     calendarWeek: true,
-//   });
-
-//   return (
-//     <ul className={weekClass}>
-//       {props.days.map((day) => (
-//         <Day
-//           key={`${day.year()}${day.month()}${day.date()}`}
-//           day={day}
-//           range={props.range}
-//           monthInView={props.monthInView}
-//           handleChange={props.handleChange}
-//         />
-//       ))}
-//     </ul>
-//   );
-// }
-
 Week.propTypes = {
   days: React.PropTypes.arrayOf(React.PropTypes.object),
   range: React.PropTypes.array,
