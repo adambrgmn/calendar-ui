@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import Month from './Month';
+import Header from './Header';
 
 export default class Calendar extends Component {
   constructor(props) {
@@ -48,6 +49,7 @@ export default class Calendar extends Component {
         <button onClick={() => this.handleClick('prev')}>&lt;</button>
         <button onClick={() => this.handleClick('today')}>Today</button>
         <button onClick={() => this.handleClick('next')}>&gt;</button>
+        <Header moment={this.state.currentMonth} />
         <Month
           moment={this.state.currentMonth}
           range={this.state.range}

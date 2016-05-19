@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import splitArray from '../../../lib/splitArray';
 
-import MonthHead from '../MonthHead';
 import Week from '../Week';
 
 export default class Month extends Component {
@@ -37,9 +36,6 @@ export default class Month extends Component {
   render() {
     return (
       <div className="calendarMonth">
-        <div className="calendarMonthHeader">
-          <MonthHead moment={this.props.moment} />
-        </div>
         <div className="calendarWeeks">
           {this.generateWeeks()}
         </div>

@@ -1,7 +1,7 @@
 import './styles.scss';
 import React from 'react';
 
-export default function MonthHead(props) {
+export default function Header(props) {
   const now = props.moment;
   const weekdays = [];
   for (let i = 0; i < 7; i++) { weekdays.push(now.weekday(i).format('dd')); }
@@ -18,6 +18,6 @@ export default function MonthHead(props) {
   );
 }
 
-MonthHead.propTypes = {
+Header.propTypes = {
   moment: React.PropTypes.object.isRequired,
 };

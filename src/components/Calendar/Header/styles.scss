@@ -1,6 +1,8 @@
 @import '../../../styles/globals.scss';
 
-.calendarHeader {}
+.calendarHeader {
+  width: $calendar-width;
+}
 
 .calendarHeaderMonth {
   text-align: center;

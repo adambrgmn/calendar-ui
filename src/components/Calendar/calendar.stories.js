@@ -4,6 +4,7 @@ import moment from 'moment';
 moment.locale('sv');
 
 import Month from './Month';
+import Header from './Header';
 
 storiesOf('Calendar.Month', module)
   .add('This month', () => <Month moment={moment()} />)
@@ -18,3 +19,6 @@ storiesOf('Calendar.Month', module)
   .add('With change handler', () => (
     <Month moment={moment()} handleChange={action()} />
   ));
+
+storiesOf('Calendar.Header', module)
+  .add('Normal', () => <Header moment={moment()} />);
