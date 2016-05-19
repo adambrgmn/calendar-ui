@@ -10,7 +10,7 @@ storiesOf('Calendar.Month', module)
   .add('Previous month', () => <Month moment={moment().add(-1, 'month')} />)
   .add('Next month', () => <Month moment={moment().add(1, 'month')} />)
   .add('With range', () => (
-    <Month moment={moment()} range={[moment().date(16), moment().date(19)]} />
+    <Month moment={moment()} range={[moment().date(14), moment().date(20)]} />
   ))
   .add('With range (outside month)', () => (
     <Month moment={moment()} range={[moment().date(30), moment().add(1, 'month').date(3)]} />

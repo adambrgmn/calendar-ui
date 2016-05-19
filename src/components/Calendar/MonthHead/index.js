@@ -4,15 +4,15 @@ import React from 'react';
 export default function MonthHead(props) {
   const now = props.moment;
   const weekdays = [];
-  for (let i = 0; i < 7; i++) { weekdays.push(now.weekday(i).format('ddd')); }
+  for (let i = 0; i < 7; i++) { weekdays.push(now.weekday(i).format('dd')); }
 
   return (
-    <div className="calendar-header">
-      <h3 colSpan="7" className="calendar-header-month">
+    <div className="calendarHeader">
+      <h3 colSpan="7" className="calendarHeaderMonth">
         {now.format('MMMM YYYY')}
       </h3>
-      <ul className="calendar-header-row">
-        {weekdays.map((day) => <li className="calendar-header-days" key={day}>{day}</li>)}
+      <ul className="calendarHeaderWeek">
+        {weekdays.map((day) => <li className="calendarHeaderDays" key={day}>{day}</li>)}
       </ul>
     </div>
   );

@@ -11,19 +11,19 @@ export default class Month extends Component {
     const now = this.props.moment;
     const monthLength = moment(now).endOf('month').date();
     const paddedDays = [];
-    let padding = moment(now).date(1).weekday();
+    const paddingLeft = moment(now).date(1).weekday();
+    const paddingRight = 7 - (moment(now).endOf('month').weekday() + 1);
 
-    for (let i = 0; i < monthLength; i++) {
+    for (let i = -paddingLeft; i < monthLength + paddingRight; i++) {
       paddedDays.push(moment(now).date(i + 1));
     }
-    while (padding--) { paddedDays.unshift(null); }
     const weeks = splitArray(paddedDays, 7);
-
     return weeks.map((days) => (
       <Week
-        key={days[days.length - 1].date()}
+        key={days[0].week()}
         days={days}
         range={this.props.range}
+        monthInView={this.props.moment}
         handleChange={this.props.handleChange}
       />
     ));
@@ -31,11 +31,11 @@ export default class Month extends Component {
 
   render() {
     return (
-      <div className="calendar-month">
-        <div className="calendar-month-header">
+      <div className="calendarMonth">
+        <div className="calendarMonthHeader">
           <MonthHead moment={this.props.moment} />
         </div>
-        <div className="calendar-weeks">
+        <div className="calendarWeeks">
           {this.generateWeeks()}
         </div>
       </div>
@@ -45,6 +45,6 @@ export default class Month extends Component {
 
 Month.propTypes = {
   moment: React.PropTypes.object.isRequired,
-  range: React.PropTypes.arrayOf(React.PropTypes.object),
+  range: React.PropTypes.array,
   handleChange: React.PropTypes.func,
 };

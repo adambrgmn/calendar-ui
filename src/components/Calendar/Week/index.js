@@ -1,30 +1,58 @@
 import './styles.scss';
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 
 import Day from '../Day';
 
-export default function Week(props) {
-  const weekClass = classNames({
-    'calendar-week': true,
-  });
+export default class Week extends Component {
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = () => true;
+  }
+  render() {
+    const weekClass = classNames({
+      calendarWeek: true,
+    });
 
-  return (
-    <ul className={weekClass}>
-      {props.days.map((day, index) => (
-        <Day
-          key={day || index + 50}
-          day={day}
-          range={props.range}
-          handleChange={props.handleChange}
-        />
-      ))}
-    </ul>
-  );
+    return (
+      <ul className={weekClass}>
+        {this.props.days.map((day) => (
+          <Day
+            key={`${day.year()}${day.month()}${day.date()}`}
+            day={day}
+            range={this.props.range}
+            monthInView={this.props.monthInView}
+            handleChange={this.props.handleChange}
+          />
+        ))}
+      </ul>
+    );
+  }
 }
+
+// export default function Week(props) {
+//   const weekClass = classNames({
+//     calendarWeek: true,
+//   });
+
+//   return (
+//     <ul className={weekClass}>
+//       {props.days.map((day) => (
+//         <Day
+//           key={`${day.year()}${day.month()}${day.date()}`}
+//           day={day}
+//           range={props.range}
+//           monthInView={props.monthInView}
+//           handleChange={props.handleChange}
+//         />
+//       ))}
+//     </ul>
+//   );
+// }
 
 Week.propTypes = {
   days: React.PropTypes.arrayOf(React.PropTypes.object),
-  range: React.PropTypes.arrayOf(React.PropTypes.object),
+  range: React.PropTypes.array,
+  monthInView: React.PropTypes.object.isRequired,
   handleChange: React.PropTypes.func,
 };

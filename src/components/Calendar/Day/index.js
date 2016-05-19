@@ -7,40 +7,40 @@ export default class Day extends Component {
   constructor(props) {
     super(props);
     this.selected = inRange(this.props.day, this.props.range);
+    this.shouldComponentUpdate = () => true;
+
+    const sharedClasses = {
+      selected: this.selected,
+      selectedFirst: this.selected === 'first' || this.selected === 'only',
+      selectedLast: this.selected === 'last' || this.selected === 'only',
+      today: this.props.day.isSame(new Date(), 'day'),
+      outsideMonth: !this.props.monthInView.isSame(this.props.day, 'month'),
+    };
+
     this.dayClass = classNames({
-      'calendar-day': true,
-      empty: !this.props.day,
+      calendarDay: true,
+      ...sharedClasses,
     });
     this.labelClass = classNames({
-      'calendar-day-label': true,
-      selected: this.selected,
-      'selected-first': this.selected === 'first',
-      'selected-last': this.selected === 'last',
-      today: this.props.day ? this.props.day.isSame(new Date(), 'day') : false,
+      calendarDayLabel: true,
+      ...sharedClasses,
     });
-  }
-
-  buildCheckbox() {
-    if (!this.props.day) return null;
-    return (
-      <label className={this.labelClass}>
-        <input
-          className="calendar-day-check"
-          type="checkbox"
-          name={this.props.day.format('MMM')}
-          value={this.props.day.format('YYYY-MM-DD')}
-          checked={this.selected}
-          onChange={() => this.props.handleChange(this.props.day)}
-        />
-        {this.props.day.date()}
-      </label>
-    );
   }
 
   render() {
     return (
       <li className={this.dayClass}>
-        {this.buildCheckbox()}
+        <label className={this.labelClass}>
+          <input
+            className="calendarDayCheck"
+            type="checkbox"
+            name={this.props.day.format('MMM')}
+            value={this.props.day.format('YYYY-MM-DD')}
+            checked={this.selected}
+            onChange={() => this.props.handleChange(this.props.day)}
+          />
+          {this.props.day.date()}
+        </label>
       </li>
     );
   }
@@ -48,6 +48,7 @@ export default class Day extends Component {
 
 Day.propTypes = {
   day: React.PropTypes.object,
-  range: React.PropTypes.arrayOf(React.PropTypes.object),
+  range: React.PropTypes.array,
+  monthInView: React.PropTypes.object.isRequired,
   handleChange: React.PropTypes.func,
 };

@@ -13,6 +13,7 @@
  */
 export default function inRange(day, range) {
   if (!day || !range) return false;
+  if (day.isSame(range[0], 'day') && day.isSame(range[1], 'day')) return 'only';
   if (day.isSame(range[0], 'day')) return 'first';
   if (day.isSame(range[1], 'day')) return 'last';
   if (day.isBetween(range[0], range[1], null, '[]')) return 'between';
