@@ -15,6 +15,10 @@ $calendar-text-secondary: rgba(0, 0, 0, 0.54);
 $calendar-text-disabled: rgba(0, 0, 0, 0.38);
 $calendar-text-white: rgba(255, 255, 255, 1);
 $calendar-header: $primary500;
-$calendar-today: $primary50;
 $calendar-selected: $primary100;
 $calendar-hover: $primary300;
+
+$calendar-width: 17.5rem;
+$calendar-padding: 1rem;
+$calendar-font-size: 0.8rem;
+$calendar-heading-font-size: 1rem;

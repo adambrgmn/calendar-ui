@@ -1,33 +1,54 @@
 @import '../../../styles/globals.scss';
 
-.calendar-day {
-  width: 2.5rem;
-  height: 2.5rem;
+.calendarDay {
+  width: calc(#{$calendar-width} / 7);
+  height: calc(#{$calendar-width} / 7);
 }
 
-.calendar-day-label {
+.calendarDayLabel {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   width: 100%;
   height: 100%;
-  font-size: 0.8rem;
+  font-size: $calendar-font-size;
   color: $calendar-text-primary;
   cursor: pointer;
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
-
-  &:hover {
-    color: $calendar-text-white;
-    background: $calendar-hover;
-  }
 }
 
-.calendar-day-label.selected {
+.calendarDayLabel.today {
+  color: $calendar-hover;
+}
+
+.calendarDay.selected {
+  border-radius: 0;
   background: $calendar-selected;
 }
 
-.calendar-day-check {
+.calendarDay.selected.selectedFirst {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.calendarDay.selected.selectedLast {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.calendarDayLabel:hover {
+  color: $calendar-text-white;
+  background: $calendar-hover;
+}
+
+.outsideMonth {
+  color: $calendar-text-disabled;
+}
+
+/////////////
+
+.calendarDayCheck {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
