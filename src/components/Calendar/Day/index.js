@@ -7,7 +7,10 @@ export default class Day extends Component {
   constructor(props) {
     super(props);
     this.selected = inRange(this.props.day, this.props.range);
-    this.shouldComponentUpdate = () => true;
+    this.shouldComponentUpdate = () => {
+      console.log('Im here');
+      return true;
+    };
 
     const sharedClasses = {
       selected: this.selected,
@@ -48,7 +51,7 @@ export default class Day extends Component {
 
 Day.propTypes = {
   day: React.PropTypes.object,
-  range: React.PropTypes.array,
+  range: React.PropTypes.object,
   monthInView: React.PropTypes.object.isRequired,
   handleChange: React.PropTypes.func,
 };

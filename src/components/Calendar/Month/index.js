@@ -6,11 +6,6 @@ import splitArray from '../../../lib/splitArray';
 import Week from '../Week';
 
 export default class Month extends Component {
-  constructor(props) {
-    super(props);
-    this.shouldComponentUpdate = (nextProps) => this.props.moment !== nextProps.moment;
-  }
-
   generateWeeks() {
     const monthLength = moment(this.props.moment).endOf('month').date();
     const paddedDays = [];
@@ -46,6 +41,6 @@ export default class Month extends Component {
 
 Month.propTypes = {
   moment: React.PropTypes.object.isRequired,
-  range: React.PropTypes.array,
+  range: React.PropTypes.object,
   handleChange: React.PropTypes.func,
 };

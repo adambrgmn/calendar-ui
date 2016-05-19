@@ -32,7 +32,7 @@ export default class Week extends Component {
 
 Week.propTypes = {
   days: React.PropTypes.arrayOf(React.PropTypes.object),
-  range: React.PropTypes.array,
+  range: React.PropTypes.object,
   monthInView: React.PropTypes.object.isRequired,
   handleChange: React.PropTypes.func,
 };
