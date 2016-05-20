@@ -6,12 +6,15 @@ import inRange from '../../../lib/inRange';
 export default class Day extends Component {
   constructor(props) {
     super(props);
-    this.selected = inRange(this.props.day, this.props.range);
-    this.shouldComponentUpdate = () => {
-      console.log('Im here');
-      return true;
-    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
+  handleChange() {
+    this.props.handleChange(this.props.day);
+  }
+
+  render() {
+    this.selected = inRange(this.props.day, this.props.range);
     const sharedClasses = {
       selected: this.selected,
       selectedFirst: this.selected === 'first' || this.selected === 'only',
@@ -20,27 +23,25 @@ export default class Day extends Component {
       outsideMonth: !this.props.monthInView.isSame(this.props.day, 'month'),
     };
 
-    this.dayClass = classNames({
+    const dayClass = classNames({
       calendarDay: true,
       ...sharedClasses,
     });
-    this.labelClass = classNames({
+    const labelClass = classNames({
       calendarDayLabel: true,
       ...sharedClasses,
     });
-  }
 
-  render() {
     return (
-      <li className={this.dayClass}>
-        <label className={this.labelClass}>
+      <li className={dayClass}>
+        <label className={labelClass}>
           <input
             className="calendarDayCheck"
             type="checkbox"
             name={this.props.day.format('MMM')}
             value={this.props.day.format('YYYY-MM-DD')}
             checked={this.selected}
-            onChange={() => this.props.handleChange(this.props.day)}
+            onChange={this.handleChange}
           />
           {this.props.day.date()}
         </label>
@@ -51,7 +52,7 @@ export default class Day extends Component {
 
 Day.propTypes = {
   day: React.PropTypes.object,
-  range: React.PropTypes.object,
+  range: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
   monthInView: React.PropTypes.object.isRequired,
   handleChange: React.PropTypes.func,
 };

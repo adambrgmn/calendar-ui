@@ -10,7 +10,13 @@ import Header from './Header';
 
 storiesOf('Calendar', module)
   .add('Normal', () => <Calendar />)
-  .add('Other locale', () => <Calendar locale="en" />);
+  .add('Other locale', () => <Calendar locale="en" />)
+  .add('With range', () => <Calendar range={List.of(new Date(), new Date(2016, 4, 24))} />)
+  .add('Return Date', () => <Calendar returnAs="date" handleChange={action()} />)
+  .add('Return moment', () => <Calendar returnAs="moment" handleChange={action()} />)
+  .add('Return milliseconds', () => <Calendar returnAs="milliseconds" handleChange={action()} />)
+  .add('Return custom', () => <Calendar returnAs="DD MMMM YYYY" handleChange={action()} />)
+  .add('ReturnAs undefined', () => <Calendar handleChange={action()} />);
 
 storiesOf('Calendar.Month', module)
   .add('This month', () => <Month moment={moment()} />)
@@ -21,6 +27,9 @@ storiesOf('Calendar.Month', module)
   ))
   .add('With range (outside month)', () => (
     <Month moment={moment()} range={List.of(moment().date(30), moment().date(37))} />
+  ))
+  .add('With range as array', () => (
+    <Month moment={moment()} range={[moment().date(14), moment().date(18)]} />
   ))
   .add('With change handler', () => (
     <Month moment={moment()} handleChange={action()} />

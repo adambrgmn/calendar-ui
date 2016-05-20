@@ -1,3 +1,5 @@
+import { List } from 'immutable';
+
 /**
  * inRange
  * This function accepts a day (as moment-object) and
@@ -12,9 +14,11 @@
  * @return {String/Bool}    Returns false or a string of placement
  */
 export default function inRange(day, range) {
-  if (!range || !range.size > 0) return false;
-  const rangeStart = range.get(0);
-  const rangeEnd = range.get(1);
+  if (!range || range.size === 0) return false;
+
+  const rangeStart = List.isList(range) ? range.get(0) : range[0];
+  const rangeEnd = List.isList(range) ? range.get(1) : range[1];
+
   if (day.isSame(rangeStart, 'day') && day.isSame(rangeEnd, 'day')) return 'only';
   if (day.isSame(rangeStart, 'day')) return 'first';
   if (day.isSame(rangeEnd, 'day')) return 'last';

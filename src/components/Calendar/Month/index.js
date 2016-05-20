@@ -41,6 +41,6 @@ export default class Month extends Component {
 
 Month.propTypes = {
   moment: React.PropTypes.object.isRequired,
-  range: React.PropTypes.object,
+  range: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
   handleChange: React.PropTypes.func,
 };

@@ -1,6 +1,6 @@
 import './styles.scss';
 import React, { Component } from 'react';
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 import moment from 'moment';
 
 import Month from './Month';
@@ -9,69 +9,53 @@ import Header from './Header';
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
-    moment.locale(this.props.locale || 'sv');
     this.handleChange = this.handleChange.bind(this);
+
+    moment.locale(this.props.locale || 'sv');
 
     this.state = {
       data: Map({
         currentMonth: moment().startOf('month'),
-        range: List(),
       }),
     };
   }
 
   handleChange(momentObj) {
-    const range = this.state.data.get('range');
-    const rangeSize = range.size;
-    const rangeStart = range.get(0);
-    const rangeEnd = range.get(1);
+    const returnAs = this.props.returnAs;
+    let returnObj;
 
-    if (rangeSize < 1) {
-      return this.setState(({ data }) => ({
-        data: data.update('range', () => List.of(momentObj, momentObj)),
-      }));
+    switch (returnAs) {
+      case 'date':
+        returnObj = new Date(momentObj.format());
+        break;
+      case 'milliseconds':
+        returnObj = momentObj.valueOf();
+        break;
+      case 'seconds':
+        returnObj = momentObj.unix();
+        break;
+      case 'moment':
+      case '':
+      case undefined:
+        returnObj = momentObj;
+        break;
+      default:
+        returnObj = momentObj.format(returnAs);
     }
 
-    if (momentObj.isBefore(rangeStart)) {
-      return this.setState(({ data }) => ({
-        data: data.update('range', (list) => list.set(0, momentObj)),
-      }));
-    }
-
-    if (momentObj.isAfter(rangeEnd)) {
-      return this.setState(({ data }) => ({
-        data: data.update('range', (list) => list.set(1, momentObj)),
-      }));
-    }
-
-    if (momentObj.isBetween(rangeStart, rangeEnd, null, [])) {
-      return this.setState(({ data }) => ({
-        data: data.update('range', (list) => list.set(1, momentObj)),
-      }));
-    }
-
-    return null;
+    return this.props.handleChange(returnObj);
   }
 
   render() {
     const state = this.state.data;
-    const range = state.get('range');
-    const rangeStart = range.get(0);
-    const rangeEnd = range.get(1);
-
     return (
       <div className="calendar">
         <Header moment={state.get('currentMonth')} />
         <Month
           moment={state.get('currentMonth')}
-          range={state.get('range')}
+          range={this.props.range}
           handleChange={this.handleChange}
         />
-        <p>
-          {rangeStart ? rangeStart.format('DD MMMM YYYY') : 'Undef'}
-          -
-          {rangeEnd ? rangeEnd.format('DD MMMM YYYY') : 'Undef'}
-        </p>
       </div>
     );
   }
@@ -79,4 +63,7 @@ export default class Calendar extends Component {
 
 Calendar.propTypes = {
   locale: React.PropTypes.string,
+  range: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  handleChange: React.PropTypes.func,
+  returnAs: React.PropTypes.string,
 };
