@@ -36,4 +36,5 @@ storiesOf('Calendar.Month', module)
   ));
 
 storiesOf('Calendar.Header', module)
-  .add('Normal', () => <Header moment={moment()} />);
+  .add('Normal', () => <Header moment={moment()} />)
+  .add('Witch click handler', () => <Header moment={moment()} handleClick={action()} />);

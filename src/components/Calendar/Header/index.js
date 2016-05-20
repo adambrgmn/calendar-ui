@@ -1,6 +1,8 @@
 import './styles.scss';
 import React from 'react';
 
+import SvgIcon from '../../SvgIcon';
+
 export default function Header(props) {
   const now = props.moment;
   const weekdays = [];
@@ -8,9 +10,17 @@ export default function Header(props) {
 
   return (
     <div className="calendarHeader">
-      <h3 colSpan="7" className="calendarHeaderMonth">
-        {now.format('MMMM YYYY')}
-      </h3>
+      <div className="calendarHeaderMonth">
+        <button className="headerButton prev" onClick={() => props.handleClick(-1)}>
+          <SvgIcon classNames="headerButtonIcon" icon="arrowLeft" />
+        </button>
+        <span className="headerMonth" onClick={() => props.handleClick('today')}>
+          {now.format('MMM YYYY')}
+        </span>
+        <button className="headerButton next" onClick={() => props.handleClick(1)}>
+          <SvgIcon classNames="headerButtonIcon" icon="arrowRight" />
+        </button>
+      </div>
       <ul className="calendarHeaderWeek">
         {weekdays.map((day) => <li className="calendarHeaderDays" key={day}>{day}</li>)}
       </ul>
@@ -20,4 +30,5 @@ export default function Header(props) {
 
 Header.propTypes = {
   moment: React.PropTypes.object.isRequired,
+  handleClick: React.PropTypes.func,
 };

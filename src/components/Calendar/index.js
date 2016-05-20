@@ -9,7 +9,8 @@ import Header from './Header';
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.chooseDay = this.chooseDay.bind(this);
+    this.changeMonth = this.changeMonth.bind(this);
 
     moment.locale(this.props.locale || 'sv');
 
@@ -20,7 +21,7 @@ export default class Calendar extends Component {
     };
   }
 
-  handleChange(momentObj) {
+  chooseDay(momentObj) {
     const returnAs = this.props.returnAs;
     let returnObj;
 
@@ -46,15 +47,27 @@ export default class Calendar extends Component {
     return this.props.handleChange(returnObj);
   }
 
+  changeMonth(num) {
+    if (num === 'today') {
+      return this.setState(({ data }) => ({
+        data: data.update('currentMonth', () => moment()),
+      }));
+    }
+
+    return this.setState(({ data }) => ({
+      data: data.update('currentMonth', (mom) => moment(mom).add(num, 'M').startOf('month')),
+    }));
+  }
+
   render() {
     const state = this.state.data;
     return (
       <div className="calendar">
-        <Header moment={state.get('currentMonth')} />
+        <Header moment={state.get('currentMonth')} handleClick={this.changeMonth} />
         <Month
           moment={state.get('currentMonth')}
           range={this.props.range}
-          handleChange={this.handleChange}
+          handleChange={this.chooseDay}
         />
       </div>
     );
